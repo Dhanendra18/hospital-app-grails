@@ -15,7 +15,6 @@
 <a href="#list-patient" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 <div class="nav" role="navigation">
 	<ul>
-		%{--<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>--}%
 		<li><g:link action="agent"><g:message code="title.agent" default="Agent" /></g:link></li>
 		<li><g:link action="hcp"><g:message code="title.hcp" default="HCP" /></g:link></li>
 		<li><g:link controller="patient" action="index"><g:message code="title.patient" default="Patient" /></g:link></li>
