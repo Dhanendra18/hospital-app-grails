@@ -91,7 +91,7 @@ environments {
     }
     production {
         grails.logging.jul.usebridge = false
-        grails.serverURL = "http://35.164.19.184/"
+//        grails.serverURL = "http://35.164.19.184/"
     }
 }
 
