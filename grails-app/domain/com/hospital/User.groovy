@@ -8,6 +8,8 @@ class User implements Serializable {
 
 	String username
 	String password
+    String contactNumber
+    String profile
 	boolean enabled = true
 	boolean accountExpired
 	boolean accountLocked
@@ -18,6 +20,14 @@ class User implements Serializable {
 		this.username = username
 		this.password = password
 	}
+
+    User(RegistrationVo registrationVo) {
+        this()
+        this.username = registrationVo.username
+        this.password = registrationVo.password
+        this.contactNumber = registrationVo.contactNumber
+        this.profile = registrationVo.profile
+    }
 
 	@Override
 	int hashCode() {
@@ -57,6 +67,8 @@ class User implements Serializable {
 	static constraints = {
 		username blank: false, unique: true
 		password blank: false
+        contactNumber blank: false
+        profile blank: false
 	}
 
 	static mapping = {

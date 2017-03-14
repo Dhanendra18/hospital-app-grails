@@ -5,7 +5,7 @@ import grails.plugin.springsecurity.annotation.Secured
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
-@Secured(value=["hasRole('agent')"])
+@Secured(["hasAnyRole('agent','admin')"])
 @Transactional(readOnly = true)
 class PatientController {
 
@@ -31,15 +31,12 @@ class PatientController {
             notFound()
             return
         }
-        println "ASsdfasdfasdfasdfasdfasdf"
         patientInstance.createdBy = springSecurityService.currentUser
         patientInstance.validate()
         if (patientInstance.hasErrors()) {
-            println "==================2================="
             respond patientInstance.errors, view:'create'
             return
         }
-        println "==================1=================" + patientInstance.dateOfBirth
 
         patientInstance.save flush:true
 
