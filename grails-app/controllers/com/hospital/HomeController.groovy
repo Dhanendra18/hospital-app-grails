@@ -27,6 +27,10 @@ class HomeController {
 
     }
 
+    def agent() {
+        render "under construction"
+    }
+
     def hcp() {
         render "under construction"
     }

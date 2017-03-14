@@ -18,7 +18,7 @@
 		%{--<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>--}%
 		<li><g:link action="agent"><g:message code="title.agent" default="Agent" /></g:link></li>
 		<li><g:link action="hcp"><g:message code="title.hcp" default="HCP" /></g:link></li>
-		<li><g:link controller="patient" action="show"><g:message code="title.patient" default="Patient" /></g:link></li>
+		<li><g:link controller="patient" action="index"><g:message code="title.patient" default="Patient" /></g:link></li>
 		<li><g:link action="agent"><g:message code="title.visits" default="Visits" /></g:link></li>
 		<li><g:link action="agent"><g:message code="title.service.package" default="Service Package" /></g:link></li>
 		<li><g:link action="agent"><g:message code="title.billing" default="Billing" /></g:link></li>
