@@ -11,13 +11,8 @@ import static org.springframework.http.HttpStatus.NOT_FOUND
 @Transactional(readOnly = true)
 class RegistrationController {
 
-
     def create() {
         respond new RegistrationVo()
-    }
-
-    def show(Patient patientInstance) {
-        respond patientInstance
     }
 
     @Transactional
@@ -39,7 +34,7 @@ class RegistrationController {
         Role role = Role.findByAuthority(registrationVo.authority)
         println role
         new UserRole(role: role, user: user).save(flush: true, failOnError: true)
-        redirect action: "index"
+        redirect action: "create"
     }
 
     def createUsername() {

@@ -7,6 +7,8 @@ class User implements Serializable {
 	transient springSecurityService
 
 	String username
+    String name
+    String surname
 	String password
     String contactNumber
     String profile
@@ -23,6 +25,8 @@ class User implements Serializable {
 
     User(RegistrationVo registrationVo) {
         this()
+        this.name = registrationVo.name
+        this.surname = registrationVo.surname
         this.username = registrationVo.username
         this.password = registrationVo.password
         this.contactNumber = registrationVo.contactNumber

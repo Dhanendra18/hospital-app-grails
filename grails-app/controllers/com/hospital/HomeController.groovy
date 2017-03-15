@@ -13,7 +13,7 @@ class HomeController {
         println "======================"+ authorities
         println "======================"+ authorities*.toString().contains("admin")
         if (authorities*.toString().contains("admin")) {
-            forward(action: "admin")
+            forward(controller: "admin", action: "index")
         } else if (authorities*.toString().contains("agent")){
             forward(controller: "patient", action: "index")
         } else if (authorities*.toString().contains("hcp")){
