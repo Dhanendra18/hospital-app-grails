@@ -40,6 +40,8 @@ class PatientController {
 
         patientInstance.save flush:true
 
+        forward(controller: "IABooking", action: "create")
+        
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'patient.label', default: 'Patient'), patientInstance.id])
@@ -47,6 +49,22 @@ class PatientController {
             }
             '*' { respond patientInstance, [status: CREATED] }
         }
+    }
+
+    def createBooking(Patient patientInstance) {
+
+    }
+
+    def saveBooking() {
+
+    }
+
+    def createConverted() {
+
+    }
+
+    def saveConverted() {
+
     }
 
     def edit(Patient patientInstance) {
