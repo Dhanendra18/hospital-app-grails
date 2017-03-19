@@ -17,7 +17,7 @@ class HomeController {
         } else if (authorities*.toString().contains("agent")){
             forward(controller: "patient", action: "index")
         } else if (authorities*.toString().contains("hcp")){
-            forward(action: "hcp")
+            forward(controller: "doctor", action: "index")
         } else {
             render "Error, please contact the customer support if the problem persist"
         }

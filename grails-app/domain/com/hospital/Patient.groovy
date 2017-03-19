@@ -30,9 +30,11 @@ class Patient {
     String consultDoctor
     String hospitalName
 
-    String aiBooked
-    String aiConverted
+    IABooking aiBooked
+    IAConverted aiConverted
     String aiCancelled
+
+
 
     Date dateCreated
     Date dateModified

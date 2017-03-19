@@ -217,31 +217,3 @@
 	<g:textField name="hospitalName" value="${patientInstance?.hospitalName}"/>
 
 </div>
-
-<div class="fieldcontain ${hasErrors(bean: patientInstance, field: 'aiBooked', 'error')} ">
-	<label for="aiBooked">
-		<g:message code="patient.aiBooked.label" default="Ai Booked" />
-		
-	</label>
-	<g:textField name="aiBooked" value="${patientInstance?.aiBooked}"/>
-
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: patientInstance, field: 'aiConverted', 'error')} ">
-	<label for="aiConverted">
-		<g:message code="patient.aiConverted.label" default="Ai Converted" />
-		
-	</label>
-	<g:textField name="aiConverted" value="${patientInstance?.aiConverted}"/>
-
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: patientInstance, field: 'aiCancelled', 'error')} ">
-	<label for="aiCancelled">
-		<g:message code="patient.aiCancelled.label" default="Ai Cancelled" />
-		
-	</label>
-	<g:textField name="aiCancelled" value="${patientInstance?.aiCancelled}"/>
-
-</div>
-

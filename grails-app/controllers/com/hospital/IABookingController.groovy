@@ -21,6 +21,7 @@ class IABookingController {
     }
 
     def create() {
+        println params
         respond new IABooking(params)
     }
 
