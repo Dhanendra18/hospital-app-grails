@@ -30,11 +30,30 @@
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: patientInstance, field: 'serviceRequired', 'error')} ">
-	<label for="serviceRequired">
+	<label for="id_serviceRequired">
 		<g:message code="patient.serviceRequired.label" default="Service Required" />
 		
 	</label>
-	<g:textField name="serviceRequired" value="${patientInstance?.serviceRequired}"/>
+	<select name="serviceRequired" id="id_serviceRequired" >
+		<option value="Physiotherapy">Physiotherapy</option>
+		<option value="Occupational_Therapy">Occupational Therapy</option>
+		<option value="Weight_loss">Weight loss</option>
+		<option value="Dietician">Dietician</option>
+		<option value="Nurse">Nurse</option>
+		<option value="Doctor">Doctor</option>
+		<option value="Healthcare_attendant">Healthcare attendant</option>
+		<option value="Lab_test">Lab Test</option>
+		<option value="Pharmacy">Pharmacy</option>
+		<option value="Other">Other</option>
+	</select>
+	<g:javascript>
+		$(document).ready(function() {
+			let serviceRequired = '${patientInstance?.serviceRequired}';
+			if(serviceRequired) {
+				$('#id_serviceRequired').val(serviceRequired);
+			}
+		});
+	</g:javascript>
 
 </div>
 
