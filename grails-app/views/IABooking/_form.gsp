@@ -29,12 +29,3 @@
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: IABookingInstance, field: 'therapistName', 'error')} ">
-	<label for="therapistName">
-		<g:message code="IABooking.therapistName.label" default="Therapist Name" />
-		
-	</label>
-	<g:textField name="therapistName" value="${IABookingInstance?.therapistName}"/>
-
-</div>
-
