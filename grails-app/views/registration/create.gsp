@@ -5,7 +5,7 @@
   Time: 11:07 PM
 --%>
 
-<%@ page import="com.hospital.Profile" contentType="text/html;charset=UTF-8" %>
+<%@ page import="com.hospital.HcpProfile; com.hospital.Profile" contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
 	<meta name="layout" content="main">
@@ -38,9 +38,29 @@
 				<div class="fieldcontain ${hasErrors(bean: registrationVoInstance, field: 'name', 'error')} required">
 					<label for="authority">
 					</label>
-					<g:radio name="authority" value="agent" checked="checked"/> Agent
-					<g:radio name="authority" value="hcp"/> HCP
-
+					<g:radio name="authority" value="agent" onchange="changeAuthority()"k checked="checked"/> Agent
+					<g:radio name="authority" value="hcp" onchange="changeAuthority()"/> HCP
+					<script>
+						function changeAuthority() {
+							let authority = $('input[name="authority"]:checked').val();
+							let $profile = $("#id_profile");
+							if(authority === "hcp") {
+								let hcpProfile = '<option value="PHYSIOTHERAPIST">PHYSIOTHERAPIST</option>'+
+										'<option value="NUTRITIONIST">NUTRITIONIST</option>'+
+										'<option value="GENERAL_PHYSICIAN">GENERAL_PHYSICIAN</option>'+
+										'<option value="OCCUPATIONAL_THERAPIST">OCCUPATIONAL_THERAPIST</option>'+
+										'<option value="NURSE">NURSE</option>'+
+										'<option value="HEALTH_CARE_ATTENDANCE">HEALTH_CARE_ATTENDANCE</option>'+
+										'<option value="OTHER">OTHER</option>';
+								$profile.html(hcpProfile);
+							} else {
+								let agentProfile = '<option value="Sales">Sales</option>'+
+										'<option value="Customer_Support">Customer_Support</option>'+
+										'<option value="Other">Other</option>';
+								$profile.html(agentProfile);
+							}
+						}
+					</script>
 				</div>
 
 				<div class="fieldcontain ${hasErrors(bean: registrationVoInstance, field: 'name', 'error')} required">
@@ -72,9 +92,7 @@
 						<g:message code="registration.profile.label" default="Profile" />
 						<span class="required-indicator">*</span>
 					</label>
-					<g:select from="${Profile.values()}" name="profile" />
-					%{--<g:textField name="profile" required="" value="${registrationVoInstance?.profile}"/>--}%
-
+					<g:select from="${Profile.values()}" name="profile" id="id_profile" />
 				</div>
 				<div class="fieldcontain ${hasErrors(bean: registrationVoInstance, field: 'username', 'error')} required">
 					<label for="profile">
