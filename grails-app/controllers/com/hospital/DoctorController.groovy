@@ -10,12 +10,13 @@ class DoctorController {
         params.max = Math.min(max ?: 10, 100)
         User user = springSecurityService.getCurrentUser();
         List<Patient> patientList = IABooking.findAllByTherapistNameAndStatus(user, BookingStatus.ASSIGNED, params)*.patient
-        respond patientList
+        Integer count = IABooking.countByTherapistNameAndStatus(user, BookingStatus.ASSIGNED)
+        respond patientList, model:[patientInstanceCount: count]
     }
 
-    def show() {
-        Patient patient = Patient.findById(1L)
-        respond patient ? new PatientForDoctorVO(patient) : new PatientForDoctorVO()
+    def show(Patient patient) {
+        PatientForDoctorVO patientInstance = new PatientForDoctorVO(patient)
+        respond patientInstance, model: [patientInstance: patientInstance]
     }
 
     def start() {

@@ -5,22 +5,27 @@ package com.hospital
  */
 class PatientForDoctorVO {
     String id
-    String patient_name
-    String nok_name
-    String address
-    String clinical_details
-    String diagnosis
-    String agent_name
-    String visit_time
+    //patient name
+    String name
+    String nokName
+    //todo: convert it to address
+    String homeLocation
+    String clinicalDetails
+    //diagnosis
+    String historyOfDisease
+    // agent name
+    User createdBy
+    String visitTime
 
     PatientForDoctorVO(Patient patient) {
         this.id = patient.id
-        this.patient_name = patient.name
-        this.nok_name = patient.nokName
-        this.address = patient.homeLocation + " " + patient.homeState + " " + patient.homePin
-        this.clinical_details = patient.clinicalDetails
-        this.diagnosis = patient.diagnosis
-        this.agent_name = patient.createdBy
+        this.name = patient.name
+        this.nokName = patient.nokName
+        this.homeLocation = patient.homeLocation ?:"" + " " + patient.homeState?: "" + " " + patient.homePin?: ""
+        this.clinicalDetails = patient.clinicalDetails
+        this.historyOfDisease = patient.diagnosis
+        this.createdBy = patient.createdBy
+        this.visitTime = patient?.aiBooked?.timeSlot
     }
 
     PatientForDoctorVO() {}

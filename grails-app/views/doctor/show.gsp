@@ -27,59 +27,59 @@
 	</g:if>
 	<ol class="property-list patient">
 
-		<g:if test="${patientInstance?.patient_name}">
+		<g:if test="${patientInstance?.name}">
 			<li class="fieldcontain">
-				<span id="patient_name" class="property-label"><g:message code="patient.patient_name.label" default="Patient Name" /></span>
+				<span id="name" class="property-label"><g:message code="patient.patient_name.label" default="Patient Name" /></span>
 
-				<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${patientInstance}" field="patient_name"/></span>
+				<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${patientInstance}" field="name"/></span>
 
 			</li>
 		</g:if>
-		<g:if test="${patientInstance?.nok_name}">
+		<g:if test="${patientInstance?.nokName}">
 			<li class="fieldcontain">
-				<span id="nok_name" class="property-label"><g:message code="patient.nok_name.label" default="NOK Name" /></span>
+				<span id="nokName" class="property-label"><g:message code="patient.nok_name.label" default="NOK Name" /></span>
 
-				<span class="property-value" aria-labelledby="nok_name"><g:fieldValue bean="${patientInstance}" field="nok_name"/></span>
+				<span class="property-value" aria-labelledby="nokName"><g:fieldValue bean="${patientInstance}" field="nokName"/></span>
 
 			</li>
 		</g:if>
-		<g:if test="${patientInstance?.address}">
+		<g:if test="${patientInstance?.homeLocation}">
 			<li class="fieldcontain">
-				<span id="address" class="property-label"><g:message code="patient.address.label" default="Address" /></span>
+				<span id="homeLocation" class="property-label"><g:message code="patient.address.label" default="Address" /></span>
 
-				<span class="property-value" aria-labelledby="address"><g:fieldValue bean="${patientInstance}" field="address"/></span>
+				<span class="property-value" aria-labelledby="homeLocation"><g:fieldValue bean="${patientInstance}" field="homeLocation"/></span>
 
 			</li>
 		</g:if>
-		<g:if test="${patientInstance?.clinical_details}">
+		<g:if test="${patientInstance?.clinicalDetails}">
 			<li class="fieldcontain">
-				<span id="clinical_details" class="property-label"><g:message code="patient.clinical_details.label" default="Clinical Details" /></span>
+				<span id="clinicalDetails" class="property-label"><g:message code="patient.clinical_details.label" default="Clinical Details" /></span>
 
-				<span class="property-value" aria-labelledby="clinical_details"><g:fieldValue bean="${patientInstance}" field="clinical_details"/></span>
+				<span class="property-value" aria-labelledby="clinicalDetails"><g:fieldValue bean="${patientInstance}" field="clinicalDetails"/></span>
 
 			</li>
 		</g:if>
-		<g:if test="${patientInstance?.diagnosis}">
+		<g:if test="${patientInstance?.historyOfDisease}">
 			<li class="fieldcontain">
-				<span id="diagnosis" class="property-label"><g:message code="patient.diagnosis.label" default="Diagnosis" /></span>
+				<span id="historyOfDisease" class="property-label"><g:message code="patient.diagnosis.label" default="Diagnosis" /></span>
 
-				<span class="property-value" aria-labelledby="diagnosis"><g:fieldValue bean="${patientInstance}" field="diagnosis"/></span>
+				<span class="property-value" aria-labelledby="historyOfDisease"><g:fieldValue bean="${patientInstance}" field="historyOfDisease"/></span>
 
 			</li>
 		</g:if>
-		<g:if test="${patientInstance?.agent_name}">
+		<g:if test="${patientInstance?.createdBy?.name}">
 			<li class="fieldcontain">
 				<span id="agent_name" class="property-label"><g:message code="patient.agent_name.label" default="Agent Name" /></span>
 
-				<span class="property-value" aria-labelledby="agent_name"><g:fieldValue bean="${patientInstance}" field="agent_name"/></span>
+				<span class="property-value" aria-labelledby="agent_name">${patientInstance.createdBy.name}</span>
 
 			</li>
 		</g:if>
-		<g:if test="${patientInstance?.visit_time}">
+		<g:if test="${patientInstance?.visitTime}">
 			<li class="fieldcontain">
-				<span id="visit_time" class="property-label"><g:message code="patient.visit_time.label" default="Visit Time" /></span>
+				<span id="visitTime" class="property-label"><g:message code="patient.visit_time.label" default="Visit Time" /></span>
 
-				<span class="property-value" aria-labelledby="visit_time"><g:fieldValue bean="${patientInstance}" field="visit_time"/></span>
+				<span class="property-value" aria-labelledby="visitTime"><g:fieldValue bean="${patientInstance}" field="visitTime"/></span>
 
 			</li>
 		</g:if>
