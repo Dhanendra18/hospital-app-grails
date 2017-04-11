@@ -21,8 +21,14 @@ class IABookingController {
     }
 
     def create() {
-        println params
-        respond new IABooking(params)
+        IABooking iaBooking = new IABooking()
+        if(params.id) {
+            Patient patient = Patient.get(params.id)
+            if (patient) {
+                iaBooking.patient = patient
+            }
+        }
+        respond iaBooking
     }
 
     @Transactional
@@ -32,18 +38,35 @@ class IABookingController {
             return
         }
 
+        IABookingInstance.status = BookingStatus.PENDING_ASSIGN
+        IABookingInstance.validate();
+
         if (IABookingInstance.hasErrors()) {
             respond IABookingInstance.errors, view:'create'
             return
         }
 
-        IABookingInstance.save flush:true
-
+        IABooking iaBooking = IABookingInstance.save flush:true
+        Patient patient = iaBooking.patient
+        if (patient) {
+            patient.aiBooked = iaBooking
+            patient.save flush: true, failOnError: true
+        }
         redirect controller: "patient", action: "index"
     }
 
     def edit(IABooking IABookingInstance) {
         respond IABookingInstance
+    }
+
+    def assignHCP() {
+        if (params.id) {
+            IABooking iaBooking = IABooking.get(params.id)
+            redirect action: 'edit' , resource: iaBooking
+        } else {
+            flash.message = "no id found"
+            redirect controller: 'patient', action: 'index'
+        }
     }
 
     @Transactional
@@ -56,6 +79,10 @@ class IABookingController {
         if (IABookingInstance.hasErrors()) {
             respond IABookingInstance.errors, view:'edit'
             return
+        }
+
+        if (IABookingInstance.therapistName && IABookingInstance.status == BookingStatus.PENDING_ASSIGN) {
+            IABookingInstance.status = BookingStatus.ASSIGNED
         }
 
         IABookingInstance.save flush:true

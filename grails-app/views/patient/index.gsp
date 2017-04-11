@@ -36,6 +36,9 @@
 					
 						<g:sortableColumn property="serviceRequired" title="${message(code: 'patient.diagnosis.label', default: 'Service Required')}" />
 
+						<sec:ifAnyGranted roles="admin">
+							<g:sortableColumn property="aiBooked.status" title="${message(code: 'patient.diagnosis.label', default: 'Booking Status')}" />
+						</sec:ifAnyGranted>
 					</tr>
 				</thead>
 				<tbody>
@@ -52,6 +55,15 @@
 						<td>${fieldValue(bean: patientInstance, field: "homeLocation")}</td>
 					
 						<td>${fieldValue(bean: patientInstance, field: "serviceRequired")}</td>
+
+						<sec:ifAnyGranted roles="admin">
+							<g:if test="${patientInstance?.aiBooked?.status == com.hospital.BookingStatus.PENDING_ASSIGN}">
+								<td><g:link controller="IABooking" action="assignHCP" id="${patientInstance?.aiBooked?.id}" >${patientInstance?.aiBooked?.status}</g:link></td>
+							</g:if>
+							<g:else>
+								<td>${patientInstance?.aiBooked?.status}</td>
+							</g:else>
+						</sec:ifAnyGranted>
 					</tr>
 				</g:each>
 				</tbody>

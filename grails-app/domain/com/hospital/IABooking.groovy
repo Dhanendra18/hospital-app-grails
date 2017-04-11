@@ -7,9 +7,10 @@ class IABooking {
     // Create a enum
     String location
     // better to create a different domain as it should be dynamic or create enum
-    String therapistName
+    User therapistName
 
     Patient patient
+    BookingStatus status
 
     static constraints = {
         date blank: true, nullable: true
@@ -17,5 +18,6 @@ class IABooking {
         location blank: true, nullable: true
         therapistName blank: true, nullable: true
         patient blank: true, nullable: true
+        status blank: true, nullable: true
     }
 }

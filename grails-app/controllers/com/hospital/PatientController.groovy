@@ -38,9 +38,8 @@ class PatientController {
             return
         }
 
-        patientInstance.save flush:true
-
-        forward(controller: "IABooking", action: "create")
+        Patient patient = patientInstance.save flush:true
+        forward(controller: "IABooking", action: "create", id: patient.id)
     }
 
     def createBooking(Patient patientInstance) {

@@ -1,4 +1,4 @@
-<%@ page import="com.hospital.IABooking" %>
+<%@ page import="com.hospital.User; com.hospital.IABooking" %>
 
 
 
@@ -28,4 +28,14 @@
 	<g:textField name="location" value="${IABookingInstance?.location}"/>
 
 </div>
+<sec:ifAnyGranted roles="admin">
+	<div class="fieldcontain ${hasErrors(bean: IABookingInstance, field: 'therapistName', 'error')} ">
+		<label for="therapistName">
+			<g:message code="IABooking.therapistName.label" default="Therapist Name" />
+		</label>
+		<g:getHcpSelectBox />
+	</div>
+</sec:ifAnyGranted>
+<g:hiddenField name="patient" value="${IABookingInstance?.patient?.id}"/>
+
 
