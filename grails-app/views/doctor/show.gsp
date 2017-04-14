@@ -91,7 +91,7 @@
 	</ol>
 	<div id="id_commentBox" style="display: none">
 		<div class="aligncenter">
-			<g:form action="stop" >
+			<g:form action="finish" >
 				<fieldset class="finish">
 					<input type="text" name="comment" placeholder="Comment"/>
 					<input type="hidden" name="aiBookingId" value="${patientInstance?.aiBookedId}"/>
