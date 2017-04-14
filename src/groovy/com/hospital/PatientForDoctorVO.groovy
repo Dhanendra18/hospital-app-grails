@@ -16,6 +16,7 @@ class PatientForDoctorVO {
     // agent name
     User createdBy
     String visitTime
+    Long aiBookedId
 
     PatientForDoctorVO(Patient patient) {
         this.id = patient.id
@@ -26,6 +27,7 @@ class PatientForDoctorVO {
         this.historyOfDisease = patient.diagnosis
         this.createdBy = patient.createdBy
         this.visitTime = patient?.aiBooked?.timeSlot
+        this.aiBookedId = patient?.aiBooked?.id
     }
 
     PatientForDoctorVO() {}

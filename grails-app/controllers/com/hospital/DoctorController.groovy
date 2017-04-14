@@ -20,12 +20,42 @@ class DoctorController {
     }
 
     def start() {
-        println "started " + params.patientId
-
+        IABooking iaBooking = IABooking.get(params.aiBookingId)
+        if (iaBooking) {
+            iaBooking.status = BookingStatus.VISIT_STARTED
+            DoctorVisit doctorVisit = new DoctorVisit();
+            doctorVisit.iaBooking = iaBooking
+            doctorVisit.hcp = springSecurityService.getCurrentUser();
+            doctorVisit.visitStartTime = new Date()
+            doctorVisit.save(flash: true, failOnError: true)
+            render "ok"
+        } else {
+            return 'error'
+        }
     }
 
     def stop() {
-        println "stopped " + params.patientId
+        IABooking iaBooking = IABooking.get(params.aiBookingId)
+        if (iaBooking) {
+            iaBooking.status = BookingStatus.VISIT_COMPLETED
+            DoctorVisit doctorVisit = DoctorVisit.findByIaBooking(iaBooking)
+            if (doctorVisit) {
+                doctorVisit.visitEndTime = new Date();
+            }
+            render "ok"
+        } else {
+            return 'error'
+        }
+    }
 
+    def finish() {
+        IABooking iaBooking = IABooking.get(params.aiBookingId)
+        if (iaBooking) {
+            DoctorVisit doctorVisit = DoctorVisit.findByIaBooking(iaBooking)
+            if (doctorVisit) {
+                doctorVisit.comments = params.comment
+            }
+        }
+        redirect action: 'index'
     }
 }

@@ -25,6 +25,9 @@
 	<g:if test="${flash.message}">
 		<div class="message" role="status">${flash.message}</div>
 	</g:if>
+	<div id="success-response" style="display: none">
+		<div class="message" role="status" id="success-response-text"></div>
+	</div>
 	<ol class="property-list patient">
 
 		<g:if test="${patientInstance?.name}">
@@ -83,9 +86,34 @@
 
 			</li>
 		</g:if>
-		<g:remoteLink controller="doctor" action="start" params='["patientId":"${patientInstance?.id}"]'>Start</g:remoteLink>
-		<g:remoteLink controller="doctor" action="stop" params='["patientId":"${patientInstance?.id}"]'>Stop</g:remoteLink>
+		<g:remoteLink id="start-button" controller="doctor" action="start" params='["aiBookingId":"${patientInstance?.aiBookedId}"]' onSuccess="visitStarted()">Start</g:remoteLink>
+		<g:remoteLink id="stop-button" style="display: none" controller="doctor" action="stop" params='["aiBookingId":"${patientInstance?.aiBookedId}"]'  onSuccess="showDialog()">Stop</g:remoteLink>
 	</ol>
+	<div id="id_commentBox" style="display: none">
+		<div class="aligncenter">
+			<g:form action="stop" >
+				<fieldset class="finish">
+					<input type="text" name="comment" placeholder="Comment"/>
+					<input type="hidden" name="aiBookingId" value="${patientInstance?.aiBookedId}"/>
+				</fieldset>
+				<fieldset class="buttons">
+					<g:actionSubmit class="save" action="submit" value="${message(code: 'default.button.Submit.label', default: 'Submit')}" />
+				</fieldset>
+			</g:form>
+		</div>
+	</div>
 </div>
+<script>
+	function showDialog() {
+		$("#id_commentBox").show();
+		$("#stop-button").hide();
+	}
+	function visitStarted() {
+		$("#success-response-text").html("Visit has started");
+		$("#success-response").show();
+		$("#start-button").hide();
+		$("#stop-button").show();
+	}
+</script>
 </body>
 </html>
