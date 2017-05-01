@@ -13,50 +13,45 @@
 	<title>${entityName}</title>
 </head>
 <body>
-<a href="#list-agent" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-<div class="nav" role="navigation">
-	<ul>
-		<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-		<li><g:form controller="logout"><g:submitButton name="Logout">Logout</g:submitButton></g:form></li>
-	</ul>
-</div>
 <div id="list-agent" class="content scaffold-list" role="main">
-	<h1><g:message code="default.list.label" args="[entityName]" /></h1>
+	<h1 class="header"><g:message code="default.list.label" args="[entityName]" /></h1>
 	<g:if test="${flash.message}">
 		<div class="message" role="status">${flash.message}</div>
 	</g:if>
-	<table>
-		<thead>
-		<tr>
-			<g:sortableColumn property="id" title="${message(code: 'agent.name.label', default: 'user_id')}" />
+	<div class="card-panel">
+		<table>
+			<thead>
+			<tr>
+				<g:sortableColumn property="id" title="${message(code: 'agent.name.label', default: 'user_id')}" />
 
-			<g:sortableColumn property="name" title="${message(code: 'agent.name.label', default: 'Name')}" />
+				<g:sortableColumn property="name" title="${message(code: 'agent.name.label', default: 'Name')}" />
 
-			<g:sortableColumn property="surname" title="${message(code: 'agent.surname.label', default: 'Surname')}" />
+				<g:sortableColumn property="surname" title="${message(code: 'agent.surname.label', default: 'Surname')}" />
 
-			<g:sortableColumn property="contactNumber" title="${message(code: 'agent.dateOfBirth.label', default: 'Contact Number')}" />
+				<g:sortableColumn property="contactNumber" title="${message(code: 'agent.dateOfBirth.label', default: 'Contact Number')}" />
 
-			<g:sortableColumn property="profile" title="${message(code: 'agent.serviceRequired.label', default: 'Profile')}" />
-
-		</tr>
-		</thead>
-		<tbody>
-		<g:each in="${userInstanceList}" status="i" var="agentInstance">
-			<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-				<td>%{--<g:link action="show" id="${agentInstance.id}">--}%${fieldValue(bean: agentInstance, field: "id")}%{--</g:link>--}%</td>
-
-				<td>${fieldValue(bean: agentInstance, field: "name")}</td>
-
-				<td>${fieldValue(bean: agentInstance, field: "surname")}</td>
-
-				<td>${fieldValue(bean: agentInstance, field: "contactNumber")}</td>
-
-				<td>${fieldValue(bean: agentInstance, field: "profile")}</td>
+				<g:sortableColumn property="profile" title="${message(code: 'agent.serviceRequired.label', default: 'Profile')}" />
 
 			</tr>
-		</g:each>
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+			<g:each in="${userInstanceList}" status="i" var="agentInstance">
+				<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+					<td>%{--<g:link action="show" id="${agentInstance.id}">--}%${fieldValue(bean: agentInstance, field: "id")}%{--</g:link>--}%</td>
+
+					<td>${fieldValue(bean: agentInstance, field: "name")}</td>
+
+					<td>${fieldValue(bean: agentInstance, field: "surname")}</td>
+
+					<td>${fieldValue(bean: agentInstance, field: "contactNumber")}</td>
+
+					<td>${fieldValue(bean: agentInstance, field: "profile")}</td>
+
+				</tr>
+			</g:each>
+			</tbody>
+		</table>
+	</div>
 	<div class="pagination">
 		<g:paginate total="${userInstanceCount ?: 0}" />
 	</div>

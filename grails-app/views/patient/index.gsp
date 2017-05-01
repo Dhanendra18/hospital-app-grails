@@ -1,4 +1,3 @@
-
 <%@ page import="com.hospital.Patient" %>
 <!DOCTYPE html>
 <html>
@@ -17,7 +16,7 @@
 				<div class="message" role="status">${flash.message}</div>
 			</g:if>
 			<div class="card-panel">
-				<table>
+				<table class="responsive-table highlight">
 					<thead>
 					<tr>
 						<g:sortableColumn property="id" title="${message(code: 'patient.name.label', default: 'Pat_id')}" />

@@ -13,129 +13,49 @@
 	<title><g:message code="default.create.label" args="[entityName]" /></title>
 
 </head>
-	<body>
-	<div class="nav" role="navigation">
-		<ul>
-			<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-			<li><g:form controller="logout"><g:submitButton name="Logout">Logout</g:submitButton></g:form></li>
+<body>
+<div id="create-patient" class="content scaffold-create" role="main">
+	<h4 class="header"><g:message code="default.create.label" args="[entityName]" /></h4>
+	<g:if test="${flash.message}">
+		<div class="message" role="status">${flash.message}</div>
+	</g:if>
+	<g:hasErrors bean="${patientInstance}">
+		<ul class="errors" role="alert">
+			<g:eachError bean="${patientInstance}" var="error">
+				<li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
+			</g:eachError>
 		</ul>
-	</div>
-	<div id="create-patient" class="content scaffold-create" role="main">
-		<h1><g:message code="default.create.label" args="[entityName]" /></h1>
-		<g:if test="${flash.message}">
-			<div class="message" role="status">${flash.message}</div>
-		</g:if>
-		<g:hasErrors bean="${patientInstance}">
-			<ul class="errors" role="alert">
-				<g:eachError bean="${patientInstance}" var="error">
-					<li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
-				</g:eachError>
-			</ul>
-		</g:hasErrors>
+	</g:hasErrors>
 
-		<g:form action="save" controller="registration">
-			<fieldset class="form">
-				<div class="fieldcontain ${hasErrors(bean: registrationVoInstance, field: 'name', 'error')} required">
-					<label for="authority">
-					</label>
-					<g:radio name="authority" value="agent" onchange="changeAuthority()"k checked="checked"/> Agent
-					<g:radio name="authority" value="hcp" onchange="changeAuthority()"/> HCP
-					<script>
-						function changeAuthority() {
-							let authority = $('input[name="authority"]:checked').val();
-							let $profile = $("#id_profile");
-							if(authority === "hcp") {
-								let hcpProfile = '<option value="PHYSIOTHERAPIST">PHYSIOTHERAPIST</option>'+
-										'<option value="NUTRITIONIST">NUTRITIONIST</option>'+
-										'<option value="GENERAL_PHYSICIAN">GENERAL_PHYSICIAN</option>'+
-										'<option value="OCCUPATIONAL_THERAPIST">OCCUPATIONAL_THERAPIST</option>'+
-										'<option value="NURSE">NURSE</option>'+
-										'<option value="HEALTH_CARE_ATTENDANCE">HEALTH_CARE_ATTENDANCE</option>'+
-										'<option value="OTHER">OTHER</option>';
-								$profile.html(hcpProfile);
-							} else {
-								let agentProfile = '<option value="Sales">Sales</option>'+
-										'<option value="Customer_Support">Customer_Support</option>'+
-										'<option value="Other">Other</option>';
-								$profile.html(agentProfile);
-							}
-						}
-					</script>
-				</div>
-
-				<div class="fieldcontain ${hasErrors(bean: registrationVoInstance, field: 'name', 'error')} required">
-					<label for="name">
-						<g:message code="registration.name.label" default="Agent/HCP Name" />
-						<span class="required-indicator">*</span>
-					</label>
-					<g:textField name="name" class="name" required="" value="${registrationVoInstance?.name}"/>
-
-				</div>
-				<div class="fieldcontain ${hasErrors(bean: registrationVoInstance, field: 'surname', 'error')} required">
-					<label for="surname">
-						<g:message code="registration.surname.label" default="Agent/HCP Surname" />
-						<span class="required-indicator">*</span>
-					</label>
-					<g:textField name="surname" class="surname" required="" value="${registrationVoInstance?.surname}"/>
-
-				</div>
-				<div class="fieldcontain ${hasErrors(bean: registrationVoInstance, field: 'contactNumber', 'error')} required">
-					<label for="contactNumber">
-						<g:message code="registration.username.label" default="Contact number" />
-						<span class="required-indicator">*</span>
-					</label>
-					<g:textField name="contactNumber" required="" value="${registrationVoInstance?.contactNumber}"/>
-
-				</div>
-				<div class="fieldcontain ${hasErrors(bean: registrationVoInstance, field: 'profile', 'error')} required">
-					<label for="contactNumber">
-						<g:message code="registration.profile.label" default="Profile" />
-						<span class="required-indicator">*</span>
-					</label>
-					<g:select from="${Profile.values()}" name="profile" id="id_profile" />
-				</div>
-				<div class="fieldcontain ${hasErrors(bean: registrationVoInstance, field: 'username', 'error')} required">
-					<label for="profile">
-						<g:message code="registration.username.label" default="Username" />
-						<span class="required-indicator">*</span>
-					</label>
-					<g:textField name="username" class="username" readonly="readonly" required="" value="${patientInstance?.username}"/>
-
-				</div>
-				<div class="fieldcontain ${hasErrors(bean: registrationVoInstance, field: 'password', 'error')} required">
-					<label for="username">
-						<g:message code="registration.username.label" default="Password" />
-						<span class="required-indicator">*</span>
-					</label>
-					<g:passwordField name="password" required="" value="${patientInstance?.password}"/>
-
-				</div>
-			</fieldset>
-			<fieldset class="buttons">
-				<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
-			</fieldset>
+	<div class="row">
+		<g:form class="col s12" url="[resource:patientInstance, action:'save', controller:'registration']">
+			<g:render template="form"/>
+			<div class="btn-move-up right">
+				<g:submitButton name="create" class="waves-effect waves-light btn save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
+			</div>
 		</g:form>
 	</div>
-	<script>
-		$(document).on("blur",".surname",function () {
-			let username = $(".username").val();
-			let name = $(".name").val();
-			if(!username && name) {
-				let data = {
-					name : name,
-					surname: $(".surname").val()
-				};
-				$.ajax({
-					url: "${createLink(action: 'createUsername', controller: 'registration')}",
-					data: {data: JSON.stringify(data)},
-					contentType: "application/json; charset=utf-8",
-					success: function (data) {
-						$(".username").val(data.username);
-					}
-				});
-			}
-		});
+</div>
+<script>
+	$(document).on("blur",".surname",function () {
+		let username = $(".username").val();
+		let name = $(".name").val();
+		if(!username && name) {
+			let data = {
+				name : name,
+				surname: $(".surname").val()
+			};
+			$.ajax({
+				url: "${createLink(action: 'createUsername', controller: 'registration')}",
+				data: {data: JSON.stringify(data)},
+				contentType: "application/json; charset=utf-8",
+				success: function (data) {
+					$(".username").val(data.username);
+				}
+			});
+		}
+	});
 
-	</script>
-	</body>
+</script>
+</body>
 </html>
